@@ -18,9 +18,28 @@ describe("Home page", () => {
   })
 
   context("Courses section", () => {
-    it.only("Course: Testing Your First Next.js Application", () => {
-      cy.getByData("course-0").find("a").contains("Get started").click()
-      cy.location("pathname").should("equal", "/testing-your-first-application")
+
+    const courseTests = [{
+      selector: 'course-0',
+      title: 'Testing Your First Next.js Application',
+      pathname: '/testing-your-first-application'
+    },
+    {
+      selector: 'course-1',
+      title: 'Testing Foundations',
+      pathname: '/testing-foundations'
+    },
+    {
+      selector: 'course-2',
+      title: 'Cypress Fundamentals',
+      pathname: '/cypress-fundamentals'
+    }]
+
+    courseTests.forEach(({selector, title, pathname}) => {
+      specify(title, () => {
+        cy.getByData(selector).find("a").contains("Get started").click()
+        cy.location("pathname").should("equal", pathname)
+      })
     })
   })
 })
