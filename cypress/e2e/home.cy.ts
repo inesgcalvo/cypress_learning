@@ -17,5 +17,10 @@ describe("Home page", () => {
     })
   })
 
-  context("Courses section", () => {})
+  context("Courses section", () => {
+    it.only("Course: Testing Your First Next.js Application", () => {
+      cy.getByData("course-0").find("a").contains("Get started").click()
+      cy.location("pathname").should("equal", "/testing-your-first-application")
+    })
+  })
 })
